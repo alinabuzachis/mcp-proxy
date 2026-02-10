@@ -1,0 +1,17 @@
+services:
+  mcp-proxy:
+    image: litellm/litellm:v1.81.3-stable
+    ports:
+      - "4000:4000"
+    env_file: .env
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+      # Mount gcloud credentials
+      - ${HOME}/.config/gcloud:/root/.config/gcloud:ro
+       # Mount aws credentials
+      - ${HOME}/.aws:/root/.aws:ro
+    env_file:
+      - .env
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+    command: [ "--config", "/app/config.yaml", "--port", "4000" ]
