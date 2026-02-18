@@ -31,5 +31,8 @@ model_list:
 
 general_settings:
   master_key: ${PROXY_MASTER_KEY}
-  audit_logs: true
+  use_auth: true
   request_timeout: 600
+  store_model_in_db: false
+  database_url: null
+  audit_logs: false
